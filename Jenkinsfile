@@ -38,7 +38,7 @@ pipeline {
                         sh 'docker push ${DOCKER_IMAGE}:0.0.1'
                     }
                 }
-            }ㅅ
+            }
         }
 
         stage('Deploy to Kubernetes') {
