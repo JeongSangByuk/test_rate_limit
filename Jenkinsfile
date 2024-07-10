@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    
+    tools {
+        jdk 'openjdk-21-jdk'
+    }
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
