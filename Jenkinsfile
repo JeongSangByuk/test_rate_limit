@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        kubernetes {
-            defaultContainer 'shell'
-        }
-    }
+    agent any
 
     tools {
         jdk 'JDK21'
