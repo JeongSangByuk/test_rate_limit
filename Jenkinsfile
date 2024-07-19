@@ -7,7 +7,6 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
-        KUBECONFIG_CREDENTIALS = credentials('kubeconfig-credentials-id')
         DOCKER_IMAGE = 'jeongsangbyuk/springtest:0.0.1'
         K8S_NAMESPACE = 'springtest'
         JAVA_HOME = "${tool 'JDK21'}"
