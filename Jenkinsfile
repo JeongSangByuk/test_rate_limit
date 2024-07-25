@@ -37,10 +37,9 @@ pipeline {
         }
 
         stage('Push Docker Image') {
-             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-                 app.push("${env.BUILD_NUMBER}")
-                 app.push("latest")
-             }
+              script {
+                sh 'docker push jeongsangbyuk/springtest:0.0.1'
+              }
         }
     }
 
