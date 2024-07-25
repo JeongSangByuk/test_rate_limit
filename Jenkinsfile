@@ -8,6 +8,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         DOCKER_IMAGE = 'jeongsangbyuk/springtest:0.0.1'
+        K8S_URL = credentials('k8s-url')
         K8S_NAMESPACE = 'springtest'
         JAVA_HOME = "${tool 'JDK21'}"
         PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
@@ -46,8 +47,10 @@ pipeline {
             steps{
                 script{
                     sshagent (credentials: ['ncp-key']) {
-                        sh 'ssh -o StrictHostKeyChecking=no "uptime"'
-                        sh 'kubectl rollout status deployment/deploy-bbogak-api-dev -n bbogak-api'
+                        sh  """
+                        ssh -o StrictHostKeyChecking=no ${K8S_URL} << EOF
+                        microk8s kubectl rollout status deployment/deploy-bbogak-api-dev -n bbogak-api
+                        """
                     }
                 }
             }
