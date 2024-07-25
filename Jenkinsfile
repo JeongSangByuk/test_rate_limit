@@ -37,9 +37,11 @@ pipeline {
         }
 
         stage('Push Docker Image') {
-              script {
-                sh 'docker push jeongsangbyuk/springtest:0.0.1'
-              }
+            steps {
+                script {
+                    sh 'docker push jeongsangbyuk/springtest:0.0.1'
+                }
+            }
         }
     }
 
