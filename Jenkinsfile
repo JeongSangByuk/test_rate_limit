@@ -31,7 +31,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker buildx build --platform linux/amd64 -t jeongsangbyuk/springtest:0.0.1 .'
+                    sh 'docker buildx build --platform linux/amd64 -t $DOCKER_IMAGE:0.0.1 .'
                 }
             }
         }
@@ -45,7 +45,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    sh 'docker push jeongsangbyuk/springtest:0.0.1'
+                    sh 'docker push $DOCKER_IMAGE'
                 }
             }
         }
