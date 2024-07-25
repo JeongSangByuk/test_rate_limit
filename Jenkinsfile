@@ -49,7 +49,7 @@ pipeline {
                     sshagent (credentials: ['ncp-key']) {
                         sh  """
                         ssh -o StrictHostKeyChecking=no ${K8S_URL} << EOF
-                        microk8s kubectl restart status deployment/deploy-bbogak-api-dev -n bbogak-api
+                        microk8s kubectl apply -f k8s-default/deploy-bbogak-api-dev.yaml
                         """
                     }
                 }
