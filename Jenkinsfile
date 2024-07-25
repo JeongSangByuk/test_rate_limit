@@ -45,9 +45,13 @@ pipeline {
             }
         }
         stage('ssh-test') {
-            sshagent (credentials: $K8S_PK) {
-                sh 'ssh -o StrictHostKeyChecking=no "uptime"'
-                sh 'kubectl rollout status deployment/deploy-bbogak-api-dev -n bbogak-api'
+            step{
+                script{
+                    sshagent (credentials: $K8S_PK) {
+                        sh 'ssh -o StrictHostKeyChecking=no "uptime"'
+                        sh 'kubectl rollout status deployment/deploy-bbogak-api-dev -n bbogak-api'
+                    }
+                }
             }
         }
         
