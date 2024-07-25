@@ -7,7 +7,6 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
-        K8S_PK = credentials('ncp-key')
         DOCKER_IMAGE = 'jeongsangbyuk/springtest:0.0.1'
         K8S_NAMESPACE = 'springtest'
         JAVA_HOME = "${tool 'JDK21'}"
@@ -46,7 +45,7 @@ pipeline {
         stage('ssh-test') {
             steps{
                 script{
-                    sshagent (credentials: $K8S_PK) {
+                    sshagent (credentials: ['ncp-key']) {
                         sh 'ssh -o StrictHostKeyChecking=no "uptime"'
                         sh 'kubectl rollout status deployment/deploy-bbogak-api-dev -n bbogak-api'
                     }
