@@ -45,19 +45,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    withCredentials([file(credentialsId: 'KUBECONFIG_CREDENTIALS', variable: 'KUBECONFIG')]) {
-                        sh '''
-                        kubectl --kubeconfig=$KUBECONFIG set image deployment/your-app your-app=${DOCKER_IMAGE}:0.0.1 -n ${K8S_NAMESPACE}
-                        kubectl --kubeconfig=$KUBECONFIG rollout status deployment/deploy-springtest -n ${K8S_NAMESPACE}
-                        '''
-                    }
-                }
-            }
-        }
     }
 
     post {
