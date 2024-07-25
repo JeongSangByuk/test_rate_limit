@@ -24,6 +24,7 @@ pipeline {
             steps {
                 script {
                     sh './gradlew clean build'
+                    sh "cp /var/lib/jenkins/workspace/bbogak-t1/build/libs/rate-limit-0.0.1-SNAPSHOT.jar /var/lib/jenkins/workspace/bbogak-t1/"
                 }
             }
         }
