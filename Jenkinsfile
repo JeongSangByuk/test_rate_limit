@@ -12,7 +12,6 @@ pipeline {
         K8S_NAMESPACE = 'springtest'
         JAVA_HOME = "${tool 'JDK21'}"
         PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-        env.TARGET_HOST = "-p 33034 root@106.10.52.26"
     }
 
     stages {
@@ -45,7 +44,7 @@ pipeline {
             }
         }
         stage('ssh-test') {
-            step{
+            steps{
                 script{
                     sshagent (credentials: $K8S_PK) {
                         sh 'ssh -o StrictHostKeyChecking=no "uptime"'
