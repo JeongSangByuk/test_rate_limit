@@ -28,24 +28,16 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh 'docker buildx build --platform linux/amd64 -t $DOCKER_IMAGE:0.0.1 .'
-                }
-            }
-        }
-
         stage('Login'){
             steps{
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Build & Push Docker Image') {
             steps {
                 script {
-                    sh 'docker push $DOCKER_IMAGE'
+                    sh 'docker buildx build --push --platform linux/amd64 -t $DOCKER_IMAGE .'
                 }
             }
         }
