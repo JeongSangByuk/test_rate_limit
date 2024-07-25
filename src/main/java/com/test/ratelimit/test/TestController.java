@@ -15,7 +15,7 @@ public class TestController {
     @GetMapping("/test")
     public String test() {
 
-        return "test new eeeeeded : " + instanceId;
+        return "testttt : " + instanceId;
     }
 
 
